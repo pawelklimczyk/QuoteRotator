@@ -7,15 +7,15 @@ namespace QuotesRotatorApp
 {
     public partial class MainWindow : Window
     {
-        private QuotesProvider provider;
+        private QuotesEngine engine;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            provider = new QuotesProvider(UpdateQuoteLabelText);
+            engine = new QuotesEngine(UpdateQuoteLabelText);
             
-            provider.Start();
+            engine.Start();
         }
 
         private void Window_Deactivated(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace QuotesRotatorApp
 
         private void MenuItemReloadQuotes_OnClick(object sender, RoutedEventArgs e)
         {
-            provider.ReloadQuotes();
+            engine.ReloadQuotes();
         }
     }
 }
