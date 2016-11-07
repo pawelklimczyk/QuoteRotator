@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IContentProvider.cs" />
     <Compile Include="QuotesContainer.cs" />
     <Compile Include="QuotesEngine.cs" />
     <Compile Include="QuotesGroup.cs" />

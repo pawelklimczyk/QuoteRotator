@@ -11,3 +11,4 @@ build/
 *.pdb
 _ReSharper*/
 *.[Rr]e[Ss]harper
+packages
