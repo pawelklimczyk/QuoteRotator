@@ -7,9 +7,21 @@ namespace QuotesRotatorApp
 {
     public class QuotesProvider
     {
-        public List<string> GetQuotesList()
+        public QuotesContainer GetQuotesList()
         {
-            return File.ReadAllLines("quotes.txt").Where(s => !String.IsNullOrWhiteSpace(s)).ToList();
+            QuotesContainer container = new QuotesContainer
+            {
+                Groups = new List<QuotesGroup>
+                {
+                    new QuotesGroup
+                    {
+                        Name = "Default",
+                        Quotes = File.ReadAllLines("quotes.txt").Where(s => !String.IsNullOrWhiteSpace(s)).ToList()
+                    }
+                }
+            };
+
+            return container;
         }
     }
 }
