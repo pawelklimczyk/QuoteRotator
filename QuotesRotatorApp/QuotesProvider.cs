@@ -22,22 +22,34 @@ namespace QuotesRotatorApp
 
         public QuotesContainer GetQuotesList()
         {
-            QuotesContainer container = new QuotesContainer
+            QuotesContainer container = new QuotesContainer();
+            QuotesGroup current = null;
+
+            foreach (string line in contentProvider.Lines.Where(IsLogicalItemLine).ToList())
             {
-                Groups = new List<QuotesGroup>
+                if (IsGroup(line))
                 {
-                    new QuotesGroup
-                    {
-                        Name = defaultGroupName,
-                        Quotes = contentProvider.Lines.Where(CanBeAddedAsQuote).ToList()
-                    }
+                    current = container.GetOrCreateGroup(line.Substring(2, line.Length - 2));
+                    continue;
                 }
-            };
+
+                if (current == null)
+                {
+                    current = container.GetOrCreateGroup(defaultGroupName);
+                }
+
+                current.Quotes.Add(line);
+            }
 
             return container;
         }
 
-        private bool CanBeAddedAsQuote(string input)
+        private bool IsGroup(string line)
+        {
+            return line.StartsWith("##");
+        }
+
+        private bool IsLogicalItemLine(string input)
         {
             return !String.IsNullOrWhiteSpace(input) && !input.StartsWith("//");
         }

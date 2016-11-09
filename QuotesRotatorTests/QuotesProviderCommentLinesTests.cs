@@ -14,17 +14,30 @@ namespace QuotesRotatorTests
         }
 
         [Theory]
-        [InlineData("//Comment", 0)]
         [InlineData("Quote1\r\n//comment 2", 1)]
         [InlineData("//comment\r\nQuote1\r\n//comment\r\n//comment\r\nQuote2\r\n//comment\r\n", 2)]
-        public void QuotesProviderCommentLinesTestsr_providedQuotesListWithCommentLinesShouldSkipThem(string content,
-            int expectedQuotesCount)
+        public void QuotesProviderCommentLinesTests_providedQuotesListWithCommentLinesShouldSkipThem(string content,
+            int expectedGroupsCount)
         {
             contentProvider.SetLinesFromString(content);
 
             var actual = sut.GetQuotesList();
 
-            Assert.Equal(actual.Groups[0].Quotes.Count, expectedQuotesCount);
+            Assert.Equal(actual.Groups[0].Quotes.Count, expectedGroupsCount);
+        }
+
+        [Theory]
+        [InlineData("//Comment", 0)]
+        [InlineData("//Comment\r\n//comment", 0)]
+        [InlineData("//Comment\r\n//comment\r\n\r\n//comment", 0)]
+        public void QuotesProviderCommentLinesTests_providedCommentLinesOnlyShouldSkipThem(string content,
+    int expectedGroupsCount)
+        {
+            contentProvider.SetLinesFromString(content);
+
+            var actual = sut.GetQuotesList();
+
+            Assert.Equal(actual.Groups.Count, expectedGroupsCount);
         }
     }
 }
