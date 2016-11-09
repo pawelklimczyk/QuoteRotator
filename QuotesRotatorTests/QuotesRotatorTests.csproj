@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuotesProviderCommentLinesTests.cs" />
     <Compile Include="QuotesProviderTests.cs" />
+    <Compile Include="TestContentProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

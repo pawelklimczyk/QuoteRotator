@@ -8,6 +8,7 @@ namespace QuotesRotatorApp
     public class QuotesProvider
     {
         private IContentProvider contentProvider;
+        private const string defaultGroupName = "Default";
 
         public QuotesProvider()
         {
@@ -27,8 +28,8 @@ namespace QuotesRotatorApp
                 {
                     new QuotesGroup
                     {
-                        Name = "Default",
-                        Quotes = contentProvider.Lines.Where(s => !String.IsNullOrWhiteSpace(s)).ToList()
+                        Name = defaultGroupName,
+                        Quotes = contentProvider.Lines.Where(CanBeAddedAsQuote).ToList()
                     }
                 }
             };
@@ -36,11 +37,16 @@ namespace QuotesRotatorApp
             return container;
         }
 
+        private bool CanBeAddedAsQuote(string input)
+        {
+            return !String.IsNullOrWhiteSpace(input) && !input.StartsWith("//");
+        }
+
         public class FileContentProvider : IContentProvider
         {
             public string[] Lines
             {
-                get { return File.ReadAllLines("quotes.txt"); } 
+                get { return File.ReadAllLines("quotes.txt"); }
             }
         }
     }

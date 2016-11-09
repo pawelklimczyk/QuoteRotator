@@ -1,6 +1,4 @@
-﻿
-using System;
-using QuotesRotatorApp;
+﻿using QuotesRotatorApp;
 using Xunit;
 
 namespace QuotesRotatorTests
@@ -35,18 +33,6 @@ namespace QuotesRotatorTests
             Assert.Equal(actual.Groups.Count, 1);
             Assert.Equal(actual.Groups[0].Name, "Default");
             Assert.Equal(actual.Groups[0].Quotes.Count, expectedQuotesCount);
-        }
-
-        class TestContentProvider : IContentProvider
-        {
-            private string[] lines = new string[0];
-
-            public string[] Lines { get { return lines; } }
-
-            public void SetLinesFromString(string input)
-            {
-                lines = input.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            }
         }
     }
 }
