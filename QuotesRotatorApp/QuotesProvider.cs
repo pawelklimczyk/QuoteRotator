@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -25,11 +24,11 @@ namespace QuotesRotatorApp
             QuotesContainer container = new QuotesContainer();
             QuotesGroup current = null;
 
-            foreach (string line in contentProvider.Lines.Where(IsLogicalItemLine).ToList())
+            foreach (string line in contentProvider.Lines.Where(QuoteItemLineHelper.IsLogicalItem).ToList())
             {
-                if (IsGroup(line))
+                if (QuoteItemLineHelper.IsGroupItem(line))
                 {
-                    current = container.GetOrCreateGroup(line.Substring(2, line.Length - 2));
+                    current = container.GetOrCreateGroup(QuoteItemLineHelper.StripCommandPrefixFromItem(line));
                     continue;
                 }
 
@@ -44,17 +43,8 @@ namespace QuotesRotatorApp
             return container;
         }
 
-        private bool IsGroup(string line)
-        {
-            return line.StartsWith("##");
-        }
 
-        private bool IsLogicalItemLine(string input)
-        {
-            return !String.IsNullOrWhiteSpace(input) && !input.StartsWith("//");
-        }
-
-        public class FileContentProvider : IContentProvider
+        private class FileContentProvider : IContentProvider
         {
             public string[] Lines
             {
