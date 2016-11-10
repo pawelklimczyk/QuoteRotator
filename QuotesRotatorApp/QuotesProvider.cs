@@ -7,7 +7,7 @@ namespace QuotesRotatorApp
     public class QuotesProvider
     {
         private IContentProvider contentProvider;
-        private const string defaultGroupName = "Default";
+        public const string DefaultGroupName = "Default";
 
         public QuotesProvider()
         {
@@ -31,13 +31,13 @@ namespace QuotesRotatorApp
                     current = container.GetOrCreateGroup(QuoteItemLineHelper.StripCommandPrefixFromItem(line));
                     continue;
                 }
-
+                
                 if (current == null)
                 {
-                    current = container.GetOrCreateGroup(defaultGroupName);
+                    current = container.GetOrCreateGroup(DefaultGroupName);
                 }
-
-                current.Quotes.Add(line);
+                
+                current.AddQuote(line);
             }
 
             return container;

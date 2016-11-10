@@ -11,5 +11,13 @@ namespace QuotesRotatorApp
 
         public string Name { get; set; }
         public List<string> Quotes { get; set; }
+
+        public void AddQuote(string line)
+        {
+            if (!Quotes.Contains(line))
+            {
+                Quotes.Add(line);
+            }
+        }
     }
 }
