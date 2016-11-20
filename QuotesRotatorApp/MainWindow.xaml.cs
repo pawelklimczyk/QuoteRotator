@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -15,17 +16,12 @@ namespace QuotesRotatorApp
         public MainWindow()
         {
             engine = new QuotesEngine(UpdateQuoteLabelText);
-            QuoteGroups = new ObservableCollection<QuotesGroup>()
-            {
-                new QuotesGroup() {Name = "f1"},
-                new QuotesGroup() {Name = "g1"},
-                new QuotesGroup() {Name = "g2"}
-            };
+            QuoteGroups = new ObservableCollection<QuotesGroup>();
             SwitchGroupCommand = new SwitchGroupCommand(engine);
 
             InitializeComponent();
-            this.DataContext = this;
 
+            DataContext = this;
             engine.Start();
         }
 
@@ -57,6 +53,16 @@ namespace QuotesRotatorApp
         private void MenuItemReloadQuotes_OnClick(object sender, RoutedEventArgs e)
         {
             engine.ReloadQuotes();
+        }
+
+        private void GlobalContextMenu_OnOpened(object sender, RoutedEventArgs e)
+        {
+            QuoteGroups.Clear();
+
+            foreach (var group in engine.AvailableGroups)
+            {
+                QuoteGroups.Add(group);
+            }
         }
     }
 }

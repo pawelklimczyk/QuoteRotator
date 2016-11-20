@@ -10,9 +10,9 @@ namespace QuotesRotatorApp
             Groups = new List<QuotesGroup>();
         }
 
-        public QuotesGroup CurrentGroup { get { return Groups.Count > 0 ? Groups[0] : null; } }
+        public QuotesGroup CurrentGroup { get; private set; }
 
-        public List<QuotesGroup> Groups { get; set; }
+        public List<QuotesGroup> Groups { get; }
 
         public QuotesGroup GetOrCreateGroup(string line)
         {
@@ -20,11 +20,21 @@ namespace QuotesRotatorApp
 
             if (existingGroup == null)
             {
-                existingGroup = new QuotesGroup() { Name = line };
+                existingGroup = new QuotesGroup { Name = line };
                 Groups.Add(existingGroup);
             }
 
+            if (Groups.Count == 1)
+            {
+                SetCurrentGroup(existingGroup);
+            }
+
             return existingGroup;
+        }
+
+        public void SetCurrentGroup(QuotesGroup group)
+        {
+            CurrentGroup = Groups.Find(g => g == group);
         }
     }
 }

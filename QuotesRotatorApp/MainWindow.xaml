@@ -21,7 +21,7 @@
             <Setter Property="Command" Value="{Binding Path=PlacementTarget.DataContext.SwitchGroupCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"></Setter>
             <Setter Property="CommandParameter" Value="{Binding}"></Setter>
         </Style>
-        <ContextMenu x:Key="GlobalContextMenu" >
+        <ContextMenu x:Key="GlobalContextMenu" Opened="GlobalContextMenu_OnOpened">
             <MenuItem Header="Reload Quotes" Click="MenuItemReloadQuotes_OnClick"/>
             <MenuItem Header="Groups" ItemsSource="{Binding QuoteGroups}" ItemContainerStyle="{StaticResource QuoteGroupStyle}"/>
             <MenuItem Header="Exit" Click="MenuItemExit_OnClick" />

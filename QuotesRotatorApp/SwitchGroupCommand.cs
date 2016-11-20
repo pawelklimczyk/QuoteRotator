@@ -21,7 +21,6 @@ namespace QuotesRotatorApp
         public void Execute(object parameter)
         {
             QuotesGroup group = parameter as QuotesGroup;
-            MessageBox.Show(group.Name);
             engine.ChangeCurrentGroup(group);
         }
 
