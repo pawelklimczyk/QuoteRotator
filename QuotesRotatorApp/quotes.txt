@@ -1,5 +1,15 @@
-﻿Life is really simple, but we insist on making it complicated.
-Life isn't about finding yourself. Life is about creating yourself.
-We do not remember days, we remember moments.
-Very little is needed to make a happy life; it is all within yourself, in your way of thinking.
-In the end, it's not the years in your life that count. It's the life in your years.
+﻿// comment
+
+##Category 1
+Category 1 Quote 1
+Category 1 Quote 2
+Category 1 Quote 3
+
+##Category 2
+Category 2 Quote 1
+Category 2 Quote 2
+
+##Category 3
+Category 3 Quote 1
+Category 3 Quote 2
+Category 3 Quote 3

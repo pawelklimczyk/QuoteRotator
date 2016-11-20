@@ -15,7 +15,7 @@ namespace QuotesRotatorTests
         [Fact]
         public void QuotesContainerCurrent_CurrentShouldBeNullIfNoGroups()
         {
-            Assert.Null(sut.Current);
+            Assert.Null(sut.CurrentGroup);
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace QuotesRotatorTests
         {
             sut.GetOrCreateGroup("SampleGroup");
 
-            Assert.Equal(sut.Groups[0], sut.Current);
+            Assert.Equal(sut.Groups[0], sut.CurrentGroup);
         }
     }
 }

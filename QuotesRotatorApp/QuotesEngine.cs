@@ -31,7 +31,7 @@ namespace QuotesRotatorApp
 
             do
             {
-                callbackAction(container.Current.Quotes[random.Next(container.Current.Quotes.Count)]);
+                callbackAction(container.CurrentGroup.Quotes[random.Next(container.CurrentGroup.Quotes.Count)]);
 
                 if (flag.WaitOne(60 * 1000)) break;
 

@@ -10,7 +10,7 @@ namespace QuotesRotatorApp
             Groups = new List<QuotesGroup>();
         }
 
-        public QuotesGroup Current { get { return Groups.Count > 0 ? Groups[0] : null; } }
+        public QuotesGroup CurrentGroup { get { return Groups.Count > 0 ? Groups[0] : null; } }
 
         public List<QuotesGroup> Groups { get; set; }
 
