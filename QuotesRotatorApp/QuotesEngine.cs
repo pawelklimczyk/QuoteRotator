@@ -44,5 +44,10 @@ namespace QuotesRotatorApp
             flag.Set();
             Start();
         }
+
+        public void ChangeCurrentGroup(QuotesGroup group)
+        {
+            //TODO
+        }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="QuotesEngine.cs" />
     <Compile Include="QuotesGroup.cs" />
     <Compile Include="QuotesProvider.cs" />
+    <Compile Include="SwitchGroupCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

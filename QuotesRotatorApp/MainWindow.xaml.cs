@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -8,13 +9,23 @@ namespace QuotesRotatorApp
     public partial class MainWindow : Window
     {
         private QuotesEngine engine;
-
+        public ObservableCollection<QuotesGroup> QuoteGroups { get; private set; }
+        public SwitchGroupCommand SwitchGroupCommand { get; private set; }
+        
         public MainWindow()
         {
-            InitializeComponent();
-
             engine = new QuotesEngine(UpdateQuoteLabelText);
-            
+            QuoteGroups = new ObservableCollection<QuotesGroup>()
+            {
+                new QuotesGroup() {Name = "f1"},
+                new QuotesGroup() {Name = "g1"},
+                new QuotesGroup() {Name = "g2"}
+            };
+            SwitchGroupCommand = new SwitchGroupCommand(engine);
+
+            InitializeComponent();
+            this.DataContext = this;
+
             engine.Start();
         }
 
