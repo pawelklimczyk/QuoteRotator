@@ -28,11 +28,10 @@ namespace QuotesRotatorApp
             var  container = provider.GetQuotesList();
             Random random = new Random();
             Action<string> callbackAction = c as Action<string>;
-            var defaultGroup = container.Groups[0];
 
             do
             {
-                callbackAction(defaultGroup.Quotes[random.Next(defaultGroup.Quotes.Count)]);
+                callbackAction(container.Current.Quotes[random.Next(container.Current.Quotes.Count)]);
 
                 if (flag.WaitOne(60 * 1000)) break;
 
