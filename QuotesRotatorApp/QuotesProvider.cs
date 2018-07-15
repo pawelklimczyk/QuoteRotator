@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 
 namespace QuotesRotatorApp
 {
     public class QuotesProvider
     {
-        private IContentProvider contentProvider;
+        private readonly IContentProvider contentProvider;
         public const string DefaultGroupName = "Default";
 
         public QuotesProvider()
@@ -31,25 +30,22 @@ namespace QuotesRotatorApp
                     current = container.GetOrCreateGroup(QuoteItemLineHelper.StripCommandPrefixFromItem(line));
                     continue;
                 }
-                
+
                 if (current == null)
                 {
                     current = container.GetOrCreateGroup(DefaultGroupName);
+                    current.IsSelected = true;
                 }
-                
+
                 current.AddQuote(line);
             }
 
             return container;
         }
 
-
         private class FileContentProvider : IContentProvider
         {
-            public string[] Lines
-            {
-                get { return File.ReadAllLines("quotes.txt"); }
-            }
+            public string[] Lines => File.ReadAllLines("quotes.txt");
         }
     }
 }

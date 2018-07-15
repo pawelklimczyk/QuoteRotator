@@ -20,6 +20,7 @@
             <Setter Property="Header" Value="{Binding Name}"></Setter>
             <Setter Property="Command" Value="{Binding Path=PlacementTarget.DataContext.SwitchGroupCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"></Setter>
             <Setter Property="CommandParameter" Value="{Binding}"></Setter>
+            <Setter Property="IsChecked" Value="{Binding IsSelected}"></Setter>
         </Style>
         <ContextMenu x:Key="GlobalContextMenu" Opened="GlobalContextMenu_OnOpened">
             <MenuItem Header="Reload Quotes" Click="MenuItemReloadQuotes_OnClick"/>

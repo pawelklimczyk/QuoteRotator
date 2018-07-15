@@ -19,11 +19,8 @@ namespace QuotesRotatorApp
 
         public void Start()
         {
-            container = provider.GetQuotesList();
-
-            Thread worker = new Thread(Work) { IsBackground = true };
-
-            worker.Start(callbackForUiUpdateAction);
+            LoadQuotesToContainer();
+            StartRotationThread();
         }
 
         public List<QuotesGroup> AvailableGroups
@@ -57,10 +54,12 @@ namespace QuotesRotatorApp
 
             } while (true);
         }
-        
+
         public void ReloadQuotes()
         {
-            flag.Set();
+            //TODO fix: this reset currently selected group. 
+            //What in case when currently selected group is removed after reload?
+
             Start();
         }
 
@@ -70,6 +69,25 @@ namespace QuotesRotatorApp
             {
                 container.SetCurrentGroup(group);
             }
+
+            StartRotationThread();
+        }
+
+        private void LoadQuotesToContainer()
+        {
+            lock (_locker)
+            {
+                container = provider.GetQuotesList();
+            }
+        }
+
+        private void StartRotationThread()
+        {
+            //clean prievious rotation thread, if exist
+            flag.Set();
+            Thread worker = new Thread(Work) { IsBackground = true };
+
+            worker.Start(callbackForUiUpdateAction);
         }
     }
 }

@@ -34,7 +34,9 @@ namespace QuotesRotatorApp
 
         public void SetCurrentGroup(QuotesGroup group)
         {
+            Groups.ForEach(g => g.IsSelected = false);
             CurrentGroup = Groups.Find(g => g == group);
+            CurrentGroup.IsSelected = true;
         }
     }
 }
