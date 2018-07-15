@@ -1,0 +1,2 @@
+﻿1. Show group name in the bottom in UI
+2. Keyboard shortcuts (n - next quote)
