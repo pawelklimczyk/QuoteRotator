@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Configuration;
+using System.IO;
 using System.Linq;
 
 namespace QuotesRotatorApp
@@ -45,7 +46,21 @@ namespace QuotesRotatorApp
 
         private class FileContentProvider : IContentProvider
         {
-            public string[] Lines => File.ReadAllLines("quotes.txt");
+            private const string quotesFileKey = "quotesFile";
+
+            public string[] Lines
+            {
+                get
+                {
+                    if (!ConfigurationManager.AppSettings.AllKeys.Contains(quotesFileKey))
+                        throw new ConfigurationException($"[{quotesFileKey}] is not specified in .config file");
+                    
+                    if(!File.Exists(ConfigurationManager.AppSettings[quotesFileKey]))
+                        throw new ConfigurationException($"[{ConfigurationManager.AppSettings[quotesFileKey]}] does not exist");
+
+                    return File.ReadAllLines(ConfigurationManager.AppSettings[quotesFileKey]);
+                }
+            }
         }
     }
 }
